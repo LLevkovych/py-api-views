@@ -5,8 +5,8 @@ from cinema.models import Movie, Actor, Genre, CinemaHall
 
 class ActorSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
-    first_name = serializers.CharField(max_length=50, required=True)
-    last_name = serializers.CharField(max_length=50, required=True)
+    first_name = serializers.CharField(max_length=100, required=True)
+    last_name = serializers.CharField(max_length=100, required=True)
 
     def create(self, validated_data):
         return Actor.objects.create(**validated_data)
@@ -27,7 +27,7 @@ class ActorSerializer(serializers.Serializer):
 class GenreSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(
-        max_length=50, required=True, allow_blank=False,
+        max_length=100, required=True, allow_blank=False,
         validators=[UniqueValidator(
             queryset=Genre.objects.all())
         ]
@@ -45,7 +45,7 @@ class GenreSerializer(serializers.Serializer):
 class CinemaHallSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(
-        max_length=50, required=True, allow_blank=False
+        max_length=100, required=True, allow_blank=False
     )
     rows = serializers.IntegerField(required=True, min_value=1)
     seats_in_row = serializers.IntegerField(required=True, min_value=1)
